@@ -35,6 +35,8 @@ public class PhoneApp {
         /*
         Generazione dei piani
 
+        visualizzazione dei piani operatore
+
         update del costoPerMin di un piano
 
         Generazione delle sim
@@ -43,17 +45,25 @@ public class PhoneApp {
 
         inizio e fine chiamata con test di SimBusyException
 
-        visualizzazione dei piani operatore
+
          */
 
 
         OperatorPlan plan1 = networkDistribution.createOperatorPlan("standard", 10.00);
         OperatorPlan plan2 = networkDistribution.createOperatorPlan("medium", 20.50);
         OperatorPlan plan3 = networkDistribution.createOperatorPlan("premium", 25.50);
+
+        System.out.println(networkDistribution.operatorPlansToString());
+
+
         networkDistribution.updateCostPerMinToPlan("standard", 10.50);
+
+        System.out.println(networkDistribution.operatorPlansToString());
+
         SimCard mySim1 = networkDistribution.createSimcard("+39 123 4567 890", plan1, 100);
         SimCard mySim2 = networkDistribution.createSimcard("+39 123 4567 891", plan2, 100);
         SimCard mySim3 = networkDistribution.createSimcard("+39 123 4567 891", plan3, 100);
+
         Smartphone mySmartphone = networkDistribution.createSmartphone(mySim1);
 
         networkDistribution.startCall(mySmartphone,mySim2);
@@ -61,7 +71,7 @@ public class PhoneApp {
         networkDistribution.endCall(mySmartphone);
 
 
-        System.out.println(networkDistribution.operatorPlansToString());
+
 
 
 
