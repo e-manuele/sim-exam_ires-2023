@@ -1,5 +1,7 @@
 package it.ires.exam.dataobject;
 
+import java.util.Objects;
+
 public class Smartphone implements ISmartphone {
 
 
@@ -30,7 +32,7 @@ public class Smartphone implements ISmartphone {
 
     @Override
     public double calculateTotalCallsTime() {
-        return this.simcard.getCallLog()
+        return this.simcard.getCallLogSent()
                 .stream()
                 .map(Call::getMinutes)
                 .mapToDouble(Double::doubleValue)
@@ -39,7 +41,7 @@ public class Smartphone implements ISmartphone {
 
     @Override
     public double calculateCallsToSmn(SimCard dest) {
-        return this.simcard.getCallLog()
+        return this.simcard.getCallLogSent()
                 .stream()
                 .filter(c -> c.getDest().equals(dest))
                 .map(Call::getMinutes)
@@ -49,5 +51,19 @@ public class Smartphone implements ISmartphone {
 
     public String toString() {
         return this.simcard.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Smartphone that = (Smartphone) o;
+        return Objects.equals(simcard, that.simcard);
+
+}
+public SimCard getCalling(){
+        return simcard.calling.getDest();
+}
+    public SimCard getSimcard() {
+        return simcard;
     }
 }

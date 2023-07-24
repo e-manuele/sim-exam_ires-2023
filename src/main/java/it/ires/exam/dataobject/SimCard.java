@@ -10,7 +10,8 @@ public class SimCard {
     SimStatus status;
     double credit;
     OperatorPlan operatorPlan;
-    ArrayList<Call> callLog;
+    ArrayList<Call> callLogSent;
+    ArrayList<Call> callLogReceived;
 
 
     public SimCard(String number, OperatorPlan operatorPlan,double credit) {
@@ -18,7 +19,8 @@ public class SimCard {
         this.operatorPlan = operatorPlan;
         this.credit = credit;
         this.setStatus(SimStatus.LIBERO);
-        callLog = new ArrayList<>();
+        callLogSent = new ArrayList<>();
+        callLogReceived = new ArrayList<>();
     }
 
     public double getCredit() {
@@ -29,14 +31,25 @@ public class SimCard {
         this.credit = credit;
     }
 
-    public ArrayList<Call> getCallLog() {
-        return callLog;
+    public ArrayList<Call> getCallLogSent() {
+        return callLogSent;
     }
 
     public void addCall(Call call){
-        this.callLog.add(call);
+        this.callLogSent.add(call);
+    }
+    public void addCallReceived(Call call){
+        this.callLogReceived.add(call);
     }
 
+    public void getCall(SimCard caller) throws SimBusyException {
+        if (this.getStatus()) {
+            this.calling = new Call(caller);
+            this.setStatus(SimStatus.OCCUPATO);
+        } else{
+            throw new SimBusyException("The sim is busy");
+        }
+    }
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -52,7 +65,7 @@ public class SimCard {
                 ", user='" + user + '\'' +
                 ", credit=" + credit +
                 ", operatorPlan=" + operatorPlan +
-                ", callLog=" + callLog;
+                ", callLog=" + callLogSent;
     }
 
     public boolean getStatus() {
@@ -75,6 +88,12 @@ public class SimCard {
         this.setStatus(SimStatus.LIBERO);
         this.addCall(this.calling.endCall());
         credit = credit - (this.calling.getMinutes() * operatorPlan.costPerMin);
+        this.calling = null;
+
+    }
+    public void endCallReceived() {
+        this.setStatus(SimStatus.LIBERO);
+        this.addCallReceived(this.calling.endCall());
         this.calling = null;
 
     }

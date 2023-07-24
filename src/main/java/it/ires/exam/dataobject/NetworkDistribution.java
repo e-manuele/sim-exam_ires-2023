@@ -7,25 +7,22 @@ public class NetworkDistribution {
     ArrayList<Smartphone> smartphoneArrayList;
     ArrayList<OperatorPlan> operatorPlanArrayList;
 
-    public NetworkDistribution(ArrayList<Smartphone> smartphoneArrayList, ArrayList<OperatorPlan> operatorPlanArrayList) {
-        this.smartphoneArrayList = smartphoneArrayList;
-        this.operatorPlanArrayList = operatorPlanArrayList;
+    public NetworkDistribution() {
+        this.smartphoneArrayList = new ArrayList<>();
+        this.operatorPlanArrayList = new ArrayList<>();
     }
 
-    public void startCall(SimCard sim1, SimCard sim2) throws SimBusyException {
-//        if (smartphoneArrayList.isInCall() && sim2.getStatus()) {
-//            sim1.startCall(sim2);
-//            sim2.startCall((sim1));
-//        } else throw new SimBusyException("The sim is busy");
-        //
+    public void startCall(Smartphone smartphone1, SimCard sim2) throws SimBusyException {
+            smartphone1.startCall(sim2);
+            sim2.getCall(smartphone1.getSimcard());
     }
 
 
-    public void endCall(SimCard sim1, SimCard sim2) {
-        if (!sim1.getStatus() && !sim2.getStatus()) {
-            sim1.endCall();
-            sim2.endCall();
-        }
+    public void endCall(Smartphone smartphone1) {
+       SimCard called = smartphone1.getCalling();
+       smartphone1.endCall();
+       called.endCallReceived();
+
     }
 
 
@@ -47,6 +44,17 @@ public class NetworkDistribution {
     }
     public void updateCostPerMinToPlan(String name,double costPerMin){
         getPlan(name).setCostPerMin(costPerMin);
+    }
+
+    public SimCard createSimcard(String number, OperatorPlan operatorPlan,double credit) {
+        return new SimCard( number, operatorPlan,credit);
+    }
+    public void addPlan(OperatorPlan plan){
+        this.operatorPlanArrayList.add(plan);
+    }
+
+    public Smartphone createSmartphone(SimCard sim){
+        return new Smartphone(sim);
     }
 
 
