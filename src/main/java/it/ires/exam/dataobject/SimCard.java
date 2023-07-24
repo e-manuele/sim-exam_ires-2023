@@ -6,6 +6,7 @@ import java.util.Objects;
 public class SimCard {
     final String number;
     String user;
+    Call calling;
     SimStatus status;
     double credit;
     OperatorPlan operatorPlan;
@@ -16,6 +17,7 @@ public class SimCard {
         this.number = number;
         this.operatorPlan = operatorPlan;
         this.credit = credit;
+        this.setStatus(SimStatus.LIBERO);
         callLog = new ArrayList<>();
     }
 
@@ -59,5 +61,21 @@ public class SimCard {
 
     public void setStatus(SimStatus status) {
         this.status = status;
+    }
+
+    public void startCall(SimCard dest) throws SimBusyException {
+        if (this.getStatus()) {
+            this.calling = new Call(dest);
+            this.setStatus(SimStatus.OCCUPATO);
+        } else{
+            throw new SimBusyException("The sim is busy");
+        }
+    }
+    public void endCall() {
+        this.setStatus(SimStatus.LIBERO);
+        this.addCall(this.calling.endCall());
+        credit = credit - (this.calling.getMinutes() * operatorPlan.costPerMin);
+        this.calling = null;
+
     }
 }

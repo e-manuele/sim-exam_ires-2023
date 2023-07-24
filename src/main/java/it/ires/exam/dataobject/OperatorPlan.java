@@ -8,7 +8,18 @@ public class OperatorPlan {
         this.costPerMin=   costPerMin;
     }
 
+    public void setCostPerMin(double costPerMin) {
+        this.costPerMin = costPerMin;
+    }
+
     public double getCostPerMin(){
         return  this.costPerMin;
+    }
+
+    @Override
+    public String toString() {
+        return "OperatorPlan[" +
+                "costPerMin=" + costPerMin +
+                ", name='" + name + ']';
     }
 }

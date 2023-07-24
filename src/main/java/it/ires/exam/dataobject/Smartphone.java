@@ -2,7 +2,7 @@ package it.ires.exam.dataobject;
 
 public class Smartphone implements ISmartphone {
 
-    Call calling;
+
     SimCard simcard;
 
     public Smartphone(SimCard simcard) {
@@ -10,24 +10,22 @@ public class Smartphone implements ISmartphone {
     }
 
     @Override
-    public void startCall(SimCard dest) throws SimBusyException {
-        if (this.simcard.getStatus()) {
-            this.calling = new Call(dest);
-            this.simcard.setStatus(SimStatus.OCCUPATO);
-        } else{
-            throw new SimBusyException();
-    }}
+    public void startCall(SimCard dest) {
+        try {
+            this.simcard.startCall(dest);
+        } catch (SimBusyException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     @Override
     public void endCall() {
-        this.simcard.setStatus(SimStatus.LIBERO);
-        this.simcard.addCall(this.calling.endCall());
-        this.calling = null;
+        this.simcard.endCall();
     }
 
     @Override
     public boolean isInCall() {
-        return this.calling != null;
+        return this.simcard.calling != null;
     }
 
     @Override
