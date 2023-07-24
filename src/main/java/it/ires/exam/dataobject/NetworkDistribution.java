@@ -17,6 +17,7 @@ public class NetworkDistribution {
 //            sim1.startCall(sim2);
 //            sim2.startCall((sim1));
 //        } else throw new SimBusyException("The sim is busy");
+        //
     }
 
 
