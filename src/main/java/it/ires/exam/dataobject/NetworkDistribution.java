@@ -42,6 +42,9 @@ public class NetworkDistribution {
             return null;
         }
     }
+    public OperatorPlan createOperatorPlan(String name, double costPerMin){
+        return new OperatorPlan(name,costPerMin);
+    }
     public void updateCostPerMinToPlan(String name,double costPerMin){
         getPlan(name).setCostPerMin(costPerMin);
     }

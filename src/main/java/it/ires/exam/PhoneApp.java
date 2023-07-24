@@ -10,11 +10,11 @@ public class PhoneApp {
     public static void main(String[] args) throws InterruptedException, SimBusyException {
         //   Il tempo di chiamata viene ritornato in secondi per motivi di test
 
-        OperatorPlan plan1 = new OperatorPlan("standard", 15.50);
-        OperatorPlan plan2 = new OperatorPlan("medium", 20.50);
-        OperatorPlan plan3 = new OperatorPlan("premium", 25.50);
-        SimCard sim1 = new SimCard("+39 123 4567 890", plan1, 100);
-        SimCard sim2 = new SimCard("+39 123 4567 891", plan2, 10);
+//        OperatorPlan plan1 = new OperatorPlan("standard", 15.50);
+//        OperatorPlan plan2 = new OperatorPlan("medium", 20.50);
+//        OperatorPlan plan3 = new OperatorPlan("premium", 25.50);
+//        SimCard sim1 = new SimCard("+39 123 4567 890", plan1, 100);
+//        SimCard sim2 = new SimCard("+39 123 4567 891", plan2, 10);
 //        SimCard sim3 = new SimCard("+39 123 4567 892", plan3, 20);
 //        Smartphone smartphone1 = new Smartphone(sim1);
 //        Smartphone smartphone2 = new Smartphone(sim2);
@@ -29,20 +29,23 @@ public class PhoneApp {
 
 
         NetworkDistribution networkDistribution = new NetworkDistribution();
-        networkDistribution.addPlan(plan1);
-        networkDistribution.addPlan(plan2);
-        networkDistribution.addPlan(plan3);
 
 
 
 
 
+
+        OperatorPlan plan1 = networkDistribution.createOperatorPlan("standard", 10.00);
+        OperatorPlan plan2 = networkDistribution.createOperatorPlan("medium", 20.50);
+        OperatorPlan plan3 = networkDistribution.createOperatorPlan("premium", 25.50);
         networkDistribution.updateCostPerMinToPlan("standard", 10.50);
-        SimCard mySim = networkDistribution.createSimcard("+39 123 4567 890", plan1, 100);
-        Smartphone mySmartphone = networkDistribution.createSmartphone(mySim);
+        SimCard mySim1 = networkDistribution.createSimcard("+39 123 4567 890", plan1, 100);
+        SimCard mySim2 = networkDistribution.createSimcard("+39 123 4567 891", plan2, 100);
+        SimCard mySim3 = networkDistribution.createSimcard("+39 123 4567 891", plan3, 100);
+        Smartphone mySmartphone = networkDistribution.createSmartphone(mySim1);
 
-        networkDistribution.startCall(mySmartphone,sim1);
-        networkDistribution.startCall(mySmartphone,sim2);
+        networkDistribution.startCall(mySmartphone,mySim2);
+        networkDistribution.startCall(mySmartphone,mySim3);
         networkDistribution.endCall(mySmartphone);
 
 
