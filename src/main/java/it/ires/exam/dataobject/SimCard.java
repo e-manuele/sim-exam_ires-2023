@@ -1,12 +1,12 @@
 package it.ires.exam.dataobject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class SimCard {
     final String number;
     String user;
+    SimStatus status;
     double credit;
     OperatorPlan operatorPlan;
     ArrayList<Call> callLog;
@@ -51,5 +51,13 @@ public class SimCard {
                 ", credit=" + credit +
                 ", operatorPlan=" + operatorPlan +
                 ", callLog=" + callLog;
+    }
+
+    public boolean getStatus() {
+        return status.isValue();
+    }
+
+    public void setStatus(SimStatus status) {
+        this.status = status;
     }
 }

@@ -1,7 +1,7 @@
 package it.ires.exam.dataobject;
 
 public interface ISmartphone {
-    public void startCall(SimCard dest);
+    public void startCall(SimCard dest) throws SimBusyException;
 
     public void endCall();
 

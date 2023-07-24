@@ -10,12 +10,17 @@ public class Smartphone implements ISmartphone {
     }
 
     @Override
-    public void startCall(SimCard dest) {
-        this.calling = new Call(dest);
-    }
+    public void startCall(SimCard dest) throws SimBusyException {
+        if (this.simcard.getStatus()) {
+            this.calling = new Call(dest);
+            this.simcard.setStatus(SimStatus.OCCUPATO);
+        } else{
+            throw new SimBusyException();
+    }}
 
     @Override
     public void endCall() {
+        this.simcard.setStatus(SimStatus.LIBERO);
         this.simcard.addCall(this.calling.endCall());
         this.calling = null;
     }
