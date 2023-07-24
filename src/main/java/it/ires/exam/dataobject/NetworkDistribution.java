@@ -3,12 +3,12 @@ package it.ires.exam.dataobject;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class NetworkDistribution { // si deve ""sincronizzare con smartphone ""
-    ArrayList<SimCard> simCardArrayList;
+public class NetworkDistribution {
+    ArrayList<Smartphone> smartphoneArrayList;
     ArrayList<OperatorPlan> operatorPlanArrayList;
 
-    public NetworkDistribution(ArrayList<SimCard> simCardArrayList, ArrayList<OperatorPlan> operatorPlanArrayList) {
-        this.simCardArrayList = simCardArrayList;
+    public NetworkDistribution(ArrayList<Smartphone> smartphoneArrayList, ArrayList<OperatorPlan> operatorPlanArrayList) {
+        this.smartphoneArrayList = smartphoneArrayList;
         this.operatorPlanArrayList = operatorPlanArrayList;
     }
 

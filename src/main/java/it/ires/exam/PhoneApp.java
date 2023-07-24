@@ -33,24 +33,25 @@ public class PhoneApp {
     smartphone1.endCall();
 
     System.out.println("smartphone1 time spent calling sim2: " + smartphone1.calculateCallsToSmn(sim2));
+    System.out.println("smartphone1 time spent calling sim3: " + smartphone1.calculateCallsToSmn(sim3));
     System.out.println("smartphone1 total time spent calling " + smartphone1.calculateTotalCallsTime());
-    System.out.println(sim1);
+    System.out.println("sim1 info : " +sim1);
 
 
-    ArrayList<SimCard> networkOperationSim = new ArrayList<>();
+    //ArrayList<SimCard> networkOperationSim = new ArrayList<>();
     ArrayList<OperatorPlan> networkOperationPlan = new ArrayList<>();
 
-    networkOperationSim.add(sim1);
-    networkOperationSim.add(sim3);
-    networkOperationSim.add(sim2);
+//    networkOperationSim.add(sim1);
+//    networkOperationSim.add(sim3);
+//    networkOperationSim.add(sim2);
 
     networkOperationPlan.add(plan1);
     networkOperationPlan.add(plan2);
     networkOperationPlan.add(plan3);
 
-    NetworkDistribution networkDistribution = new NetworkDistribution(networkOperationSim, networkOperationPlan);
-    System.out.println(networkDistribution.operatorPlansToString());
-    networkDistribution.updateCostPerMinToPlan("standard",10.50);
+    //NetworkDistribution networkDistribution = new NetworkDistribution(networkOperationSim, networkOperationPlan);
+   // System.out.println(networkDistribution.operatorPlansToString());
+    //networkDistribution.updateCostPerMinToPlan("standard",10.50);
   }
 
 
