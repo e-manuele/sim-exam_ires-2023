@@ -13,10 +13,10 @@ public class NetworkDistribution {
     }
 
     public void startCall(SimCard sim1, SimCard sim2) throws SimBusyException {
-        if (sim1.getStatus() && sim2.getStatus()) {
-            sim1.startCall(sim2);
-            sim2.startCall((sim1));
-        } else throw new SimBusyException("The sim is busy");
+//        if (smartphoneArrayList.isInCall() && sim2.getStatus()) {
+//            sim1.startCall(sim2);
+//            sim2.startCall((sim1));
+//        } else throw new SimBusyException("The sim is busy");
     }
 
 
