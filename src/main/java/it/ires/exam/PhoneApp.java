@@ -1,16 +1,13 @@
 package it.ires.exam;
 
-import it.ires.exam.dataobject.NetworkDistribution;
-import it.ires.exam.dataobject.OperatorPlan;
-import it.ires.exam.dataobject.SimCard;
-import it.ires.exam.dataobject.Smartphone;
+import it.ires.exam.dataobject.*;
 
 import java.util.ArrayList;
 
 
 public class PhoneApp {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, SimBusyException {
         //   Il tempo di chiamata viene ritornato in secondi per motivi di test
 
         OperatorPlan plan1 = new OperatorPlan("standard", 15.50);
@@ -43,9 +40,10 @@ public class PhoneApp {
         networkDistribution.updateCostPerMinToPlan("standard", 10.50);
         SimCard mySim = networkDistribution.createSimcard("+39 123 4567 890", plan1, 100);
         Smartphone mySmartphone = networkDistribution.createSmartphone(mySim);
-        mySmartphone.startCall(sim1);
-        mySmartphone.startCall(sim2);
-        mySmartphone.endCall();
+
+        networkDistribution.startCall(mySmartphone,sim1);
+        networkDistribution.startCall(mySmartphone,sim2);
+        networkDistribution.endCall(mySmartphone);
 
 
         System.out.println(networkDistribution.operatorPlansToString());

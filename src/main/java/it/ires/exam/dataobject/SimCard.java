@@ -87,7 +87,7 @@ public class SimCard {
     public void endCall() {
         this.setStatus(SimStatus.LIBERO);
         this.addCall(this.calling.endCall());
-        credit = credit - (this.calling.getMinutes() * operatorPlan.costPerMin);
+        credit = credit - (this.calling.getMinutes() * operatorPlan.getCostPerMin());
         this.calling = null;
 
     }
