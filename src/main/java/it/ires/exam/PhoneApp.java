@@ -32,7 +32,19 @@ public class PhoneApp {
 
 
 
+        /*
+        Generazione dei piani
 
+        update del costoPerMin di un piano
+
+        Generazione delle sim
+
+        Generazione dello smartphone
+
+        inizio e fine chiamata con test di SimBusyException
+
+        visualizzazione dei piani operatore
+         */
 
 
         OperatorPlan plan1 = networkDistribution.createOperatorPlan("standard", 10.00);
